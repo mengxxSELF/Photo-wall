@@ -52,43 +52,55 @@
     function changePos(){
         // 判断距离
         var ary= this.hiteAry;
-        for(var i=0;i<ary.length;i++){
-            var cur=ary[i];
-            cur.pos =  Math.pow( this.l-cur.offsetLeft ,2)+ Math.pow(this.t-cur.offsetTop,2);
-            cur.className='';
+        if(ary.length){
+            for(var i=0;i<ary.length;i++){
+                var cur=ary[i];
+                cur.pos =  Math.pow( this.l-cur.offsetLeft ,2)+ Math.pow(this.t-cur.offsetTop,2);
+                cur.className='';
+            }
+
+            ary.sort(function (a,b) {
+                return a.pos-b.pos;
+            });
+
+            // 和 距离最短的交换位置 交换地址
+            var minBox = ary[0];
+            minBox.className=this.ele.className='change';
+
+            animate({
+                id:this.ele,
+                target:{
+                    left:minBox.offsetLeft,
+                    top:minBox.offsetTop
+                },
+                effect:3,
+                duration:500
+            })
+            animate({
+                id:minBox,
+                target:{
+                    left:this.l,
+                    top:this.t
+                },
+                effect:3,
+                duration:500
+            })
+
+            // 记得交换地址
+            var tmpL = this.ele.l , tmpT=this.ele.t;
+            this.ele.l= minBox.offsetLeft , this.ele.t=minBox.offsetTop;
+            minBox.l=tmpL ,minBox.t=tmpT;
+        }else{
+            animate({
+                id:this.ele,
+                target:{
+                    left:this.l,
+                    top:this.t
+                },
+                effect:3,
+                duration:500
+            })
         }
-
-        ary.sort(function (a,b) {
-            return a.pos-b.pos;
-        });
-
-        // 和 距离最短的交换位置 交换地址
-        var minBox = ary[0];
-        minBox.className=this.ele.className='change';
-
-        animate({
-            id:this.ele,
-            target:{
-                left:minBox.offsetLeft,
-                top:minBox.offsetTop
-            },
-            effect:3,
-            duration:500
-        })
-        animate({
-            id:minBox,
-            target:{
-                left:this.l,
-                top:this.t
-            },
-            effect:3,
-            duration:500
-        })
-
-        // 记得交换地址
-        var tmpL = this.ele.l , tmpT=this.ele.t;
-        this.ele.l= minBox.offsetLeft , this.ele.t=minBox.offsetTop;
-        minBox.l=tmpL ,minBox.t=tmpT;
 
 
     }

@@ -96,7 +96,7 @@ Drag.prototype.addRange=function(e){
 Drag.prototype.creaseIndex=function(){
     this.on('selfDown',function(){
         this.ele.style.zIndex=++Drag.prototype.zIndex;
-    })
+    });
     return this;
 };
 Drag.prototype.jump=function(){

@@ -14,8 +14,8 @@
 //    1 JS 重新定位
     for(var i=aP.length-1;i>=0;i--){
         var cur = aP[i];
-        cur.style.left=(cur.l=cur.offsetLeft)+'px';
-        cur.style.top= (cur.t=cur.offsetTop)+'px';
+        cur.style.left=(cur.offsetLeft)+'px';
+        cur.style.top= (cur.offsetTop)+'px';
         cur.style.position='absolute'; // 注意这里最后写定位 因为会对offsetLeft 产生影响
         cur.style.margin=0;
         // 2 加入拖拽 层级提升
@@ -87,10 +87,16 @@
             })
 
             // 记得交换地址
-            var tmpL = this.ele.l , tmpT=this.ele.t;
-            this.ele.l= minBox.offsetLeft , this.ele.t=minBox.offsetTop;
+            var tmpL = this.l , tmpT=this.t;
+            this.l= minBox.offsetLeft , this.t=minBox.offsetTop;
             minBox.l=tmpL ,minBox.t=tmpT;
+
+            // 重置碰撞元素存放数组
+            this.hiteAry=[];
+
+
         }else{
+            // 当将元素拖出去 不发生碰撞  释放元素后 回到原始位置
             animate({
                 id:this.ele,
                 target:{

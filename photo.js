@@ -86,14 +86,8 @@
                 duration:500
             })
 
-            // 记得交换地址
-            var tmpL = this.l , tmpT=this.t;
-            this.l= minBox.offsetLeft , this.t=minBox.offsetTop;
-            minBox.l=tmpL ,minBox.t=tmpT;
-
             // 重置碰撞元素存放数组
             this.hiteAry=[];
-
 
         }else{
             // 当将元素拖出去 不发生碰撞  释放元素后 回到原始位置
